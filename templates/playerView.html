@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<link  href="{{url_for('static', filename='playerView.css')}}" rel="stylesheet" type="text/css" />
+<html>
+    <a href="{{url_for('index')}}">
+        <div class ="leaderboard">
+            Leaderboard
+        
+        </div>
+    </a>
+    <div style="text-align: center; color: white; font-size: 300%; font-weight:700;">
+        {{user.userName}}
+    
+    </div>
+<div id="stats">
+    <div id="temp">
+        
+        <div id="test">
+            {{user.guessOutline}}
+        </div>
+        <div id="wordName">
+            Wordle {{day}}
+        </div>
+        <div id="word">
+            <div id="1"></div>
+            <div id="2"></div>
+            <div id="3"></div>
+            <div id="4"></div>
+            <div id="5"></div>
+            <div id="6"></div>
+            <div id="7"></div>
+            <div id="8"></div>
+            <div id="9"></div>
+            <div id="10"></div>
+            <div id="11"></div>
+            <div id="12"></div>
+            <div id="13"></div>
+            <div id="14"></div>
+            <div id="15"></div>
+            <div id="16"></div>
+            <div id="17"></div>
+            <div id="18"></div>
+            <div id="19"></div>
+            <div id="20"></div>
+            <div id="21"></div>
+            <div id="22"></div>
+            <div id="23"></div>
+            <div id="24"></div>
+            <div id="25"></div>
+            <div id="26"></div>
+            <div id="27"></div>
+            <div id="28"></div>
+            <div id="29"></div>
+            <div id="30"></div>
+        </div>
+    </div>
+    <div id="number">
+        <div id="daily" >
+            <div id="score">
+                <div class="name">
+                    Daily Score
+                </div>
+                <div class = "result" >
+                    {{user.guessString}}/6
+                </div>   
+            </div>
+            <div id="rank">
+                <div class="name">
+                    <div>
+                        Daily Rank
+                    </div>
+                </div>
+                <div class = "result">
+                    <div>
+                        {{rank}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="avg">
+            <div id="score">
+                <div class="name">
+                    <div>
+                        AVG Score
+                    </div>
+                </div>
+                <div class = "result">
+                    <div>
+                        {{user.avgGuess}}/6
+                    </div>
+                </div>
+            </div>
+            <div id="rank">
+                <div class="name">
+                    <div>
+                        AVG Rank
+                    </div>
+                </div>
+                <div class = "result">
+                    <div>
+                        {{strAvgRank}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    word = document.getElementById('test').innerText
+    word = word.replace(/\s/g , '')
+    word = word.replace(/\55357/g, '')
+    let decode = []
+    for(let i = 0; i < word.length; i++)
+    {   
+        color = word.charCodeAt(i)
+        if(color != 55357)
+        {
+            if(color == 11035 )
+            {
+                decode.push('gray') 
+            }
+            else if(color == 57318 || color == 57320)
+            {
+                decode.push('yellow')
+            }
+            else if(color == 57319 || color == 57321)
+            {
+                decode.push('green')
+            }
+        }
+
+    }
+    
+    for(let i = 0; i < decode.length; i++)
+    {
+        if(decode[i] == "gray")
+        {
+            document.getElementById(i + 1).style.background = ''
+        }
+        else if(decode[i] == "yellow")
+        {
+            document.getElementById(i + 1).style.background = "#d9e320"
+        }
+        else if(decode[i] == "green")
+        {
+            document.getElementById(i + 1).style.background = "#32a852"
+        }
+    }
+</script>
+</html>

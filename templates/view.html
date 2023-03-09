@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<link  href="{{url_for('static', filename='mainView.css')}}" rel="stylesheet" type="text/css" />
+
+<html>
+<title>ADK</title>
+<h1>
+    ADK WORDLE
+</h1>
+    <h2 id ="header">Daily</h2>
+    <div class = "rank-container">
+        
+        <div class = "slide fade">
+            <div class="buttons">
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            {%for user in users%}
+            <a id ="user" href="{{url_for('player', var = user.id)}}">
+                <div id="username">{{user.userName}}</div> 
+                <div id="score">{{user.guessString}}/6</div>  
+            </a>
+            {% endfor %}
+        </div>
+        <div class = "slide fade">
+            <div class="buttons">
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            {%for user in avgUsers%}
+            <a id ="user" href="{{url_for('player', var = user.id)}}">
+                <div id="username">{{user.userName}}</div> 
+                <div id="score">{{user.avgGuess}}/6</div>  
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        let slideIndex = 1;
+        let head = true;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+        showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+        showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slide");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "block";
+        changeHeader();
+        }
+        function changeHeader()
+        {   
+            let header = document.getElementById('header');
+            if(head)
+            {
+                header.innerHTML = "Daily";
+            }
+            else
+            {
+                header.innerHTML = "Average";
+            }
+            head = !(head);
+        }
+    </script>
+</html>
